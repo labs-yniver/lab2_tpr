@@ -2,19 +2,15 @@
 #define __ClassKeeper__
 #include <stdio.h>
 #include <iostream>
+#include "Note.hpp"
 #include "List.h"
-#include "Figure.hpp"
-#include "quadrate.hpp"
-#include "kube.hpp"
 
 using namespace std;
 
-class Keeper: public List<Figure*>{
+class Keeper: public List<Note *>{
     
     private:
     public:
-bool save_to_file(std::string file_name);
-bool load_from_file(std::string file_name);
 void showAll();
 
 };
