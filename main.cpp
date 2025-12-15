@@ -8,17 +8,31 @@ Note* getNote(Keeper **keeper);
 void workWithNote(Note **fig, Keeper **keeper);
 
 int main(){
+    Note *n;
     Keeper *keeper = new Keeper;
-    while(1){
-        Note *fig = getNote(&keeper);
-        if(fig == nullptr){
-            continue;
-        }
-        keeper->add(fig);
-        workWithNote(&fig,&keeper);
+    n = new Note("bcd","123",1,1,1);
+    keeper->add(n);
+    n = new Note("cd","123",1,2,1);
+    keeper->add(n);
+    n = new Note("abcd","123",1,2,1);
+    keeper->add(n);
 
-    }
-    return 0;
+    // keeper->showAll();
+    cout<<endl<<keeper->get_string_month(2)<<endl;
+    cout<<endl<<endl;
+    keeper->sort();
+    // keeper->showAll();
+    cout<<endl<<keeper->get_string_month(2)<<endl;
+    // while(1){
+    //     Note *fig = getNote(&keeper);
+    //     if(fig == nullptr){
+    //         continue;
+    //     }
+    //     keeper->add(fig);
+    //     workWithNote(&fig,&keeper);
+
+    // }
+    // return 0;
 }
 
 void workWithNote(Note **fig, Keeper **keeper){

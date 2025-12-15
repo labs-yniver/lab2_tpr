@@ -97,3 +97,12 @@ std::string Note::to_string() const
     res += std::string("date = ") + get_date_string() + std::string(";\n");
     return res;
 }
+
+int Note::get_index_for_sort_fname(int index = 0)
+{
+    if(fname.empty()){
+        return 257;
+    }else{
+        return fname.at(index);
+    }
+}

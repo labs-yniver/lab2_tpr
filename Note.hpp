@@ -21,6 +21,8 @@ class Note{
 
         void show() const;
         std::string to_string() const;
+
+        int get_index_for_sort_fname(int index = 0);
     private:
         std::string fname = "";
         std::string phone = "";

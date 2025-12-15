@@ -13,7 +13,18 @@ void Keeper::showAll()
 
 void Keeper::sort(bool reverse)
 {
-    
+     for(int i = 0;i<this->len();++i){
+        Note *ni = this->at(i)->getData();
+        for(int j = i;j<this->len();++j){
+            Note *nj = this->at(j)->getData();
+            if(nj->get_index_for_sort_fname() < ni->get_index_for_sort_fname()){
+                //Note *temp = nj;
+                this->at(j)->setData(ni);
+                this->at(i)->setData(nj);
+                break;
+            }
+        }
+     }
 }
 
 std::string Keeper::get_string_month(int month)
