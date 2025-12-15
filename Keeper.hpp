@@ -11,7 +11,9 @@ class Keeper: public List<Note *>{
     
     private:
     public:
-void showAll();
+        void showAll();
+        void sort(bool reverse = false);
+        std::string get_string_month(int month);
 
 };
 #include "Keeper.cpp"
