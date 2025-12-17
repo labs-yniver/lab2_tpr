@@ -2,9 +2,14 @@
 
 Note::Note()
 {
-    set_fname("pass");
-    set_phone("pass");
-    set_date(0,0,0);
+    fname = std::string("pass");
+    phone = std::string("pass");
+    date[0]=0;
+    date[1]=0;
+    date[2]=0;
+    // set_fname(std::string("pass"));
+    // set_phone(std::string("pass"));
+    // set_date(0,0,0);
 }
 
 Note::Note(std::string fname, std::string phone, int day, int month, int year)
@@ -98,7 +103,7 @@ std::string Note::to_string() const
     return res;
 }
 
-int Note::get_index_for_sort_fname(int index = 0)
+int Note::get_index_for_sort_fname(int index)
 {
     if(fname.empty()){
         return 257;

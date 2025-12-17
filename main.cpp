@@ -4,35 +4,40 @@
 
 using namespace std;
 
+bool g_old_element = false;
+
 Note* getNote(Keeper **keeper);
 void workWithNote(Note **fig, Keeper **keeper);
 
 int main(){
-    Note *n;
+    // Note *n;
     Keeper *keeper = new Keeper;
-    n = new Note("bcd","123",1,1,1);
-    keeper->add(n);
-    n = new Note("cd","123",1,2,1);
-    keeper->add(n);
-    n = new Note("abcd","123",1,2,1);
-    keeper->add(n);
+    // n = new Note("bcd","123",1,1,1);
+    // keeper->add(n);
+    // n = new Note("cd","123",1,2,1);
+    // keeper->add(n);
+    // n = new Note("abcd","123",1,2,1);
+    // keeper->add(n);
 
-    // keeper->showAll();
-    cout<<endl<<keeper->get_string_month(2)<<endl;
-    cout<<endl<<endl;
-    keeper->sort();
-    // keeper->showAll();
-    cout<<endl<<keeper->get_string_month(2)<<endl;
-    // while(1){
-    //     Note *fig = getNote(&keeper);
-    //     if(fig == nullptr){
-    //         continue;
-    //     }
-    //     keeper->add(fig);
-    //     workWithNote(&fig,&keeper);
+    // // keeper->showAll();
+    // cout<<endl<<keeper->get_string_month(2)<<endl;
+    // cout<<endl<<endl;
+    // keeper->sort();
+    // // keeper->showAll();
+    // cout<<endl<<keeper->get_string_month(2)<<endl;
+    while(1){
+        Note *fig = getNote(&keeper);
+        if(fig == nullptr){
+            continue;
+        }
+        if(g_old_element == false){
+            keeper->add(fig);
+        }
+        g_old_element = false;
+        workWithNote(&fig,&keeper);
 
-    // }
-    // return 0;
+    }
+    return 0;
 }
 
 void workWithNote(Note **fig, Keeper **keeper){
@@ -90,12 +95,16 @@ Note* getNote(Keeper **keeper){
                     return nullptr;  
                 }
                 fig = (*keeper)->at(comand)->getData();
+                g_old_element = true;
             }
         }else if(comand == 2){
             cout<<"Choose:\n1. Create new;\n2. Copy from keeper\n";
             cin>>comand;
             if(comand==1){
-                fig = new Note;
+            cout<<"NEW1\n";
+                fig = new Note();
+                //fig = new Note("","",1,1,1);
+            cout<<"NEW2\n";
             }else if(comand == 2){
                 if((*keeper)->len()==0){
                     cout<<"Can't get element from Keeper, len = 0\n";
@@ -107,14 +116,15 @@ Note* getNote(Keeper **keeper){
                         cout<<"Not correct input\n";
                         return nullptr;  
                     }
-                    Note *copy;
-                    fig = (*keeper)->at(comand)->getData();
+                    Note *copy= (*keeper)->at(comand)->getData();
+                    fig = new Note(*copy);
                 }
             }else{
                 cout<<"Not correct input\n";
                 return nullptr; 
             }
 
+            cout<<"NEW3\n";
         }else if(comand == 3){
             delete (*keeper);
             (*keeper) = new Keeper;
