@@ -139,6 +139,33 @@ void List<T>::setLast(Element<T>* el){
     last = el;
 }
 
+template <class T>
+int List<T>::insert(T val, int index)
+{
+    Element<T>* curr = head;
+    Element<T> *el = new Element<T>;
+    el->setData(val);
+    
+    if(curr==0){
+        return 0;
+    }
+    if(index==0){
+        head->setNext(el);
+        el->setNext(curr);
+        return 1;
+    }
+    for(int cur_index = 1;cur_index<(index)&&curr->getNext();cur_index++){
+        curr = curr->getNext();
+    }
+    if(curr->getNext()==0){
+        return 0;
+    }
+    Element<T>* temp = curr->getNext();
+    curr->setNext(el);
+    el->setNext(temp);
+    return 1;
+}
+
 template<class T>
 void List<T>::copy(List<T> &res) const {
     if(res.getHead()!=0){

@@ -8,6 +8,7 @@ bool g_old_element = false;
 
 Note* getNote(Keeper **keeper);
 void workWithNote(Note **fig, Keeper **keeper);
+void add_or_insert(Note **fig, Keeper **keeper);
 
 int main(){
     // Note *n;
@@ -30,14 +31,45 @@ int main(){
         if(fig == nullptr){
             continue;
         }
-        if(g_old_element == false){
-            keeper->add(fig);
-        }
-        g_old_element = false;
+        add_or_insert(&fig,&keeper);
         workWithNote(&fig,&keeper);
 
     }
     return 0;
+}
+
+
+void add_or_insert(Note **fig, Keeper **keeper){
+    if(g_old_element == false){
+        int comand = 0;
+        cout<<"Choose:\n1. add in end\n2. insert into position\n0. delete;\n";
+        cin>>comand;
+        if(comand == 0){
+            delete *fig;
+            *fig = nullptr;
+        }else if(comand==1){
+            (*keeper)->add(*fig);
+        }else if(comand==2){
+            if((*keeper)->len()==0){
+                cout<<"Element add to end because, len = 0\n";
+                (*keeper)->add(*fig);
+            }else{
+                cout<<string("Choose num of element for insert from 0 to ")+to_string((*keeper)->len()-1)+string("\n");
+                cin>>comand;
+                if(comand<0 || comand>((*keeper)->len()-1)){
+                    cout<<"Not correct input item add to end";
+                    (*keeper)->add(*fig);
+                }
+                (*keeper)->insert((*fig),comand);
+            }
+        }else{
+            cout<<"Not correct input item add to end";
+            (*keeper)->add(*fig);
+
+        }
+        
+    }
+    g_old_element = false;
 }
 
 void workWithNote(Note **fig, Keeper **keeper){
@@ -116,8 +148,11 @@ Note* getNote(Keeper **keeper){
                         cout<<"Not correct input\n";
                         return nullptr;  
                     }
+                    cout<<"1-----\n\n";
                     Note *copy= (*keeper)->at(comand)->getData();
+                    cout<<"2-----\n\n";
                     fig = new Note(*copy);
+                    cout<<"3-----\n\n";
                 }
             }else{
                 cout<<"Not correct input\n";

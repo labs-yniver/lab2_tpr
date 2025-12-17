@@ -30,6 +30,8 @@ class List{
         Element<T>* getLast() const;
         void setLast(Element<T>* el);
         
+        int insert(T val, int index);
+
         void add(T var);
         Element<T>* at(int index);
         int remove(int index);

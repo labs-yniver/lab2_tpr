@@ -2,14 +2,14 @@
 
 Note::Note()
 {
-    fname = std::string("pass");
-    phone = std::string("pass");
-    date[0]=0;
-    date[1]=0;
-    date[2]=0;
-    // set_fname(std::string("pass"));
-    // set_phone(std::string("pass"));
-    // set_date(0,0,0);
+    // fname = std::string("pass");
+    // phone = std::string("pass");
+    // date[0]=1;
+    // date[1]=1;
+    // date[2]=1;
+    set_fname(std::string("pass"));
+    set_phone(std::string("pass"));
+    set_date(1,1,1);
 }
 
 Note::Note(std::string fname, std::string phone, int day, int month, int year)
