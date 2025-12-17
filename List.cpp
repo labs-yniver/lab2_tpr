@@ -150,8 +150,9 @@ int List<T>::insert(T val, int index)
         return 0;
     }
     if(index==0){
-        head->setNext(el);
         el->setNext(curr);
+        head = el;
+        // head->setNext(el);
         return 1;
     }
     for(int cur_index = 1;cur_index<(index)&&curr->getNext();cur_index++){

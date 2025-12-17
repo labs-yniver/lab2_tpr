@@ -97,7 +97,13 @@ void workWithNote(Note **fig, Keeper **keeper){
             cin>>day;
             cin>>month;
             cin>>year;
-            (*fig)->set_date(day, month, year);
+            try{
+                (*fig)->set_date(day, month, year);
+            }catch (const char* msg) {
+                // Обработка исключения типа "строка"
+                cout << "date not setted, error set date: " << msg << endl;
+                //(*fig)->set_date(1, 1, 1);
+            }
         }else{
             cout<<"Not correct input\n";
             continue;  
@@ -133,10 +139,8 @@ Note* getNote(Keeper **keeper){
             cout<<"Choose:\n1. Create new;\n2. Copy from keeper\n";
             cin>>comand;
             if(comand==1){
-            cout<<"NEW1\n";
                 fig = new Note();
                 //fig = new Note("","",1,1,1);
-            cout<<"NEW2\n";
             }else if(comand == 2){
                 if((*keeper)->len()==0){
                     cout<<"Can't get element from Keeper, len = 0\n";
@@ -148,18 +152,13 @@ Note* getNote(Keeper **keeper){
                         cout<<"Not correct input\n";
                         return nullptr;  
                     }
-                    cout<<"1-----\n\n";
                     Note *copy= (*keeper)->at(comand)->getData();
-                    cout<<"2-----\n\n";
                     fig = new Note(*copy);
-                    cout<<"3-----\n\n";
                 }
             }else{
                 cout<<"Not correct input\n";
                 return nullptr; 
             }
-
-            cout<<"NEW3\n";
         }else if(comand == 3){
             delete (*keeper);
             (*keeper) = new Keeper;
@@ -169,7 +168,7 @@ Note* getNote(Keeper **keeper){
             cout<<"Choose month(number):\n";
             cin>>comand;
             if(comand>0 && comand <13){
-                (*keeper)->get_string_month(comand);
+                cout<<(*keeper)->get_string_month(comand)<<endl;
             }else 
             {
                 cout<<"Not correct input\n";
