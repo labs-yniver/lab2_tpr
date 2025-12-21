@@ -11,21 +11,7 @@ void workWithNote(Note **fig, Keeper **keeper);
 void add_or_insert(Note **fig, Keeper **keeper);
 
 int main(){
-    // Note *n;
     Keeper *keeper = new Keeper;
-    // n = new Note("bcd","123",1,1,1);
-    // keeper->add(n);
-    // n = new Note("cd","123",1,2,1);
-    // keeper->add(n);
-    // n = new Note("abcd","123",1,2,1);
-    // keeper->add(n);
-
-    // // keeper->showAll();
-    // cout<<endl<<keeper->get_string_month(2)<<endl;
-    // cout<<endl<<endl;
-    // keeper->sort();
-    // // keeper->showAll();
-    // cout<<endl<<keeper->get_string_month(2)<<endl;
     while(1){
         Note *fig = getNote(&keeper);
         if(fig == nullptr){

@@ -13,19 +13,39 @@ void Keeper::showAll()
 
 void Keeper::sort(bool reverse)
 {
-     for(int i = 0;i<this->len();++i){
-        Note *ni = this->at(i)->getData();
-        for(int j = i;j<this->len();++j){
-            Note *nj = this->at(j)->getData();
-            if(nj->get_index_for_sort_fname() < ni->get_index_for_sort_fname()){
-                //Note *temp = nj;
-                this->at(j)->setData(ni);
-                this->at(i)->setData(nj);
-                break;
+    int n = this->len();
+    if (n < 2) return; // Сортировка не нужна, если элементов меньше 2
+
+    for (int i = 0; i < n - 1; ++i) {
+        // Флаг для оптимизации: если за проход не было замен, массив уже отсортирован
+        bool swapped = false;
+
+        for (int j = 0; j < n - i - 1; ++j) {
+            Note *n_current = this->at(j)->getData();
+            Note *n_next = this->at(j + 1)->getData();
+
+            bool condition;
+            if (reverse) {
+                // Для убывания: если текущий меньше следующего — меняем
+                condition = n_current->get_index_for_sort_fname() < n_next->get_index_for_sort_fname();
+            } else {
+                // Для возрастания: если текущий больше следующего — меняем
+                condition = n_current->get_index_for_sort_fname() > n_next->get_index_for_sort_fname();
+            }
+
+            if (condition) {
+                // Меняем данные местами
+                this->at(j)->setData(n_next);
+                this->at(j + 1)->setData(n_current);
+                swapped = true;
             }
         }
-     }
+
+        // Если за весь цикл по j не было ни одной перестановки, выходим раньше
+        if (!swapped) break;
+    }
 }
+
 
 std::string Keeper::get_string_month(int month)
 {
